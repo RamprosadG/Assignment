@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import React from "react";
 import { BackToHome } from "@/components/backToHome/backToHome";
 import { ProductList } from "@/views/products/productList/productList";
@@ -18,7 +19,9 @@ export const Products: React.FC = () => {
   return (
     <div>
       <BackToHome />
-      <ProductList products={paginatedProducts} />
+      <Suspense fallback={<div>Loading products...</div>}>
+        <ProductList products={paginatedProducts} />
+      </Suspense>
       <div className="h-4" />
       <PaginationControls
         currentPage={currentPage}
