@@ -45,9 +45,10 @@ export const UserAgentProvider: React.FC<UserAgentProviderProps> = ({
   );
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setUserAgent(window.navigator.userAgent);
-  }, []);
+    if (typeof window !== "undefined" && !userAgent) {
+      setUserAgent(window.navigator.userAgent);
+    }
+  }, [userAgent]);
 
   const value = useMemo<UserAgentContextType>(
     () => ({
